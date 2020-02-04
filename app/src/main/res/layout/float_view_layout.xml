@@ -8,8 +8,9 @@
         android:id="@+id/test_img"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:text="Push"
+        android:layout_margin="2dp"
+        android:text="1"
         android:gravity="center"
         android:textColor="#fff"
-        android:background="@drawable/bg_floating_view"/>
+        android:background="@drawable/bg_floating"/>
 </LinearLayout>

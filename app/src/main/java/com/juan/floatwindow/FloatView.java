@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -18,6 +18,7 @@ public class FloatView extends FrameLayout {
     private WindowManager.LayoutParams mParams;
     private FloatWindowManager floatWindowManager;
 
+    private TextView mTextView;
     private long startTime;
     private long endTime;
     private float mTouchStartX, mTouchStartY;
@@ -27,19 +28,12 @@ public class FloatView extends FrameLayout {
         super(context);
         this.mContext = context;
         View mView = LayoutInflater.from(mContext).inflate(R.layout.float_view_layout, null);
-        mView.findViewById(R.id.test_img).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "3333", Toast.LENGTH_SHORT).show();
-            }
-        });
+        mTextView = mView.findViewById(R.id.test_img);
         this.addView(mView);
         floatWindowManager = FloatWindowManager.getInstance(context);
         screenWidth = floatWindowManager.getScreenWidthPixels();
         screenHeight = floatWindowManager.getScreenHeightPixels();
     }
-
-
 
     public void show(){
         mParams = new WindowManager.LayoutParams();
@@ -110,4 +104,17 @@ public class FloatView extends FrameLayout {
         }
         return super.dispatchTouchEvent(event);
     }
+
+    public void setInnerClickListener(OnClickListener onClickListener){
+        if (mTextView != null){
+            mTextView.setOnClickListener(onClickListener);
+        }
+    }
+
+    public void setInnerText(String text) {
+        if (mTextView != null){
+            mTextView.setText(text);
+        }
+    }
+
 }
