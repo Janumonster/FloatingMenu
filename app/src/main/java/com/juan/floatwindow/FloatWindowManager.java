@@ -1,6 +1,7 @@
 package com.juan.floatwindow;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -8,27 +9,31 @@ import android.view.WindowManager;
 class FloatWindowManager {
     private static final String TAG = "FloatWindowManager";
 
-    private WindowManager windowManager;
-    private static FloatWindowManager manager;
+    private WindowManager mWindowManager;
+    private static FloatWindowManager floatManager;
+    private DisplayMetrics mMetrics = new DisplayMetrics();
 
     static FloatWindowManager getInstance(Context context){
-        if (manager == null){
+        if (floatManager == null){
             synchronized (FloatWindowManager.class){
-                if (manager == null){
-                    manager = new FloatWindowManager(context);
+                if (floatManager == null){
+                    floatManager = new FloatWindowManager(context);
                 }
             }
         }
-        return manager;
+        return floatManager;
     }
 
     private FloatWindowManager(Context context){
-        windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (mWindowManager != null){
+            mWindowManager.getDefaultDisplay().getMetrics(mMetrics);
+        }
     }
 
     public void addView(View view, WindowManager.LayoutParams params){
         try {
-            windowManager.addView(view, params);
+            mWindowManager.addView(view, params);
         }catch (Exception e){
             Log.i(TAG, "add view error:" + e.getMessage());
         }
@@ -37,7 +42,7 @@ class FloatWindowManager {
 
     public void removeView(View view){
         try {
-            windowManager.removeView(view);
+            mWindowManager.removeView(view);
         }catch (Exception e){
             Log.i(TAG, "remove view error:" + e.getMessage());
         }
@@ -46,10 +51,18 @@ class FloatWindowManager {
 
     public void updateView(View view, WindowManager.LayoutParams params){
         try {
-            windowManager.updateViewLayout(view, params);
+            mWindowManager.updateViewLayout(view, params);
         }catch (Exception e){
             Log.i(TAG, "update view error:" + e.getMessage());
         }
+    }
+
+    public int getScreenWidthPixels(){
+       return mMetrics.widthPixels;
+    }
+
+    public int getScreenHeightPixels(){
+        return mMetrics.heightPixels;
     }
 
 }

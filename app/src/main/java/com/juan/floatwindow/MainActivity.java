@@ -16,20 +16,20 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getBaseContext(), MyService.class);
-//                intent.putExtra(MyService.ACTION, MyService.SHOW);
-//                startService(intent);
-                floatView.show();
+                Intent intent = new Intent(getBaseContext(), MyService.class);
+                intent.putExtra(MyService.ACTION, MyService.SHOW);
+                startService(intent);
+//                floatView.show();
             }
         });
 
         findViewById(R.id.hide).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getBaseContext(), MyService.class);
-//                intent.putExtra(MyService.ACTION, MyService.HIDe);
-//                startService(intent);
-                floatView.hide();
+                Intent intent = new Intent(getBaseContext(), MyService.class);
+                intent.putExtra(MyService.ACTION, MyService.HIDe);
+                startService(intent);
+//                floatView.hide();
             }
         });
     }

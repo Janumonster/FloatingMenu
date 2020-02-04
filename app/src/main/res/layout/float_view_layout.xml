@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#FC7878">
+    android:gravity="center">
 
-    <ImageView
+    <TextView
         android:id="@+id/test_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
-        android:contentDescription="test" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="Push"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:background="@drawable/bg_floating_view"/>
 </LinearLayout>
